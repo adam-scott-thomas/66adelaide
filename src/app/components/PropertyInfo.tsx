@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link } from "react-router";
 import { motion } from "motion/react";
 import { ArrowLeft, ChevronRight, MapPin, Building2, Briefcase, ExternalLink } from "lucide-react";
+import { SiteNav } from "./SiteNav";
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
@@ -103,25 +104,9 @@ export default function PropertyInfo() {
 
       <div className="min-h-screen bg-white">
         {/* Nav */}
-        <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-border">
-          <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 h-16 flex items-center justify-between">
-            <Link
-              to="/"
-              className="flex items-center gap-2 text-foreground/50 hover:text-foreground transition-colors text-sm"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              66 Adelaide
-            </Link>
-            <div className="flex items-center gap-2 text-xs text-foreground/35">
-              <Link to="/" className="hover:text-foreground/60 transition-colors">66 Adelaide</Link>
-              <ChevronRight className="w-3 h-3" />
-              <span className="text-foreground/70">Property Info</span>
-            </div>
-          </div>
-        </nav>
-
-        {/* Header */}
-        <header className="py-20 px-6 md:px-12 lg:px-16 border-b border-border">
+        <SiteNav />
+        {/* Header — pt-16 clears fixed nav */}
+        <header className="pt-16 py-20 px-6 md:px-12 lg:px-16 border-b border-border">
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}

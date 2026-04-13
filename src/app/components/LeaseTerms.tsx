@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { motion } from "motion/react";
 import { Link } from "react-router";
 import { ArrowLeft, AlertTriangle, DollarSign, Home, Wrench, Shield, FileText, ChevronRight } from "lucide-react";
+import { SiteNav } from "./SiteNav";
 
 interface Clause {
   name: string;
@@ -137,9 +139,54 @@ const impactDot: Record<string, string> = {
 };
 
 export default function LeaseTerms() {
+  useEffect(() => {
+    document.title = "Lease Terms — Documented Clauses | 66 Adelaide Detroit MI";
+
+    const metaTags = [
+      {
+        name: "description",
+        content:
+          "Selected clauses from the signed lease agreement for 66 Adelaide Street, Detroit, MI 48201 — including tenant responsibility shifts, liability allocation, financial penalties, and habitability provisions.",
+      },
+      {
+        name: "keywords",
+        content:
+          "66 Adelaide lease terms, 66 Adelaide Detroit lease, 66 Adelaide LLC lease agreement, Detroit apartment lease clauses, tenant rights Detroit MI, 66 Adelaide Street lease",
+      },
+      { property: "og:title", content: "Lease Terms | 66 Adelaide Detroit" },
+      {
+        property: "og:description",
+        content:
+          "Selected lease clauses and plain-language summaries for 66 Adelaide Street, Detroit, MI 48201.",
+      },
+    ];
+
+    metaTags.forEach(({ name, property, content }: { name?: string; property?: string; content: string }) => {
+      const selector = name ? `meta[name="${name}"]` : `meta[property="${property}"]`;
+      let meta = document.querySelector(selector);
+      if (meta) {
+        meta.setAttribute("content", content);
+      } else {
+        meta = document.createElement("meta");
+        if (name) meta.setAttribute("name", name);
+        if (property) meta.setAttribute("property", property);
+        meta.setAttribute("content", content);
+        document.head.appendChild(meta);
+      }
+    });
+
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute("href", "https://www.66adelaide.com/lease-terms");
+  }, []);
+
   return (
     <>
-      {/* Structured Data — BreadcrumbList + SpecialAnnouncement */}
+      {/* Structured Data */}
       <script type="application/ld+json">
         {JSON.stringify([
           {
@@ -178,26 +225,10 @@ export default function LeaseTerms() {
       </script>
 
       <div className="min-h-screen bg-white">
-        {/* Nav Bar */}
-        <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-border">
-          <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 h-16 flex items-center justify-between">
-            <Link
-              to="/"
-              className="flex items-center gap-2 text-foreground/60 hover:text-foreground transition-colors text-sm"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              66 Adelaide
-            </Link>
-            <div className="flex items-center gap-2 text-xs text-foreground/40">
-              <Link to="/" className="hover:text-foreground/60 transition-colors">66 Adelaide</Link>
-              <ChevronRight className="w-3 h-3" />
-              <span className="text-foreground">Lease Terms</span>
-            </div>
-          </div>
-        </nav>
+        <SiteNav />
 
-        {/* Hero */}
-        <header className="py-20 px-6 md:px-12 lg:px-16 bg-foreground text-background">
+        {/* Hero — pt-16 clears fixed nav */}
+        <header className="pt-16 py-20 px-6 md:px-12 lg:px-16 bg-foreground text-background">
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}

@@ -1,11 +1,8 @@
-import { motion, useScroll, useTransform } from "motion/react";
-import { useRef, useEffect } from "react";
-import { Link } from "react-router";
-import {
-  Bug, Wrench, Zap, AlertTriangle, MessageSquare,
-  FileText, Shield, Mail, ChevronRight, ArrowRight, Lock
+import { Bug, Wrench, Zap, AlertTriangle, MessageSquare,
+  FileText, Mail, ChevronRight, ArrowRight, Lock
 } from "lucide-react";
 import buildingPhoto from "../imports/the-amo-detroit-mi-primary-photo-1.jpg";
+import { SiteNav } from "./components/SiteNav";
 
 const keyAreas = [
   {
@@ -244,6 +241,7 @@ export default function Landing() {
       </script>
 
       <div className="min-h-screen bg-background">
+        <SiteNav transparent />
 
         {/* ── HERO ─────────────────────────────────────────────── */}
         <section
@@ -262,17 +260,6 @@ export default function Landing() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20" />
           </motion.div>
-
-          {/* Top nav */}
-          <div className="absolute top-0 inset-x-0 z-20 flex items-center justify-between px-6 md:px-12 lg:px-16 pt-6">
-            <span className="text-white/50 text-xs tracking-widest uppercase">66 Adelaide · Detroit, MI</span>
-            <Link
-              to="/lease-terms"
-              className="text-white/70 hover:text-white transition-colors text-xs tracking-wide border border-white/20 px-4 py-2 hover:border-white/50"
-            >
-              Lease Terms →
-            </Link>
-          </div>
 
           <div className="relative z-10 max-w-7xl mx-auto w-full px-6 md:px-12 lg:px-16 pb-20">
             <motion.div
